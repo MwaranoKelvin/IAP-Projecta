@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SmartVote Admin Dashboard</title>
+  <link rel="stylesheet" href="admin.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+
+  
+  <header class="navbar">
+    <div class="logo">SmartVote System</div>
+    <nav>
+      <a href="#">Dashboard</a>
+      <a href="results.html">Results</a>
+      <a href="settings.html">Settings</a>
+      <a href="#" class="logout">Logout</a>
+    </nav>
+  </header>
+
+  <main class="container">
+
+    
+    <section class="page-header">
+      <h1>Admin Dashboard</h1>
+      <p>Manage elections and monitor system activity</p>
+    </section>
+
+    <section class="stats">
+      <div class="card blue">
+        <h4>Total Voters</h4>
+        <p>1,247</p>
+      </div>
+
+      <div class="card green">
+        <h4>Active Elections</h4>
+        <p>2</p>
+      </div>
+
+      <div class="card orange">
+        <h4>Voter Turnout</h4>
+        <p>68%</p>
+      </div>
+
+      <div class="card purple">
+        <h4>Total Elections</h4>
+        <p>12</p>
+      </div>
+    </section>
+
+   
+    <section class="quick-actions">
+      <h3>Quick Actions</h3>
+
+      <div class="actions-grid">
+        <a href="#">
+        <div class="action primary">
+          <h4>Create Election</h4>
+          <p>Start a new election process</p>
+        </div></a>
+
+        <a href="voters.html"><div class="action">
+          <h4>Manage Voters</h4>
+          <p>Review and approve voters</p>
+        </div></a>
+
+        <a href="results.html"><div class="action">
+          <h4>View Results</h4>
+          <p>Real-time election results</p>
+        </div></a>
+
+        <a href="#"><div class="action">
+          <h4>Settings</h4>
+          <p>Configure system settings</p>
+        </div></a>
+      </div>
+    </section>
+
+  
+   <section class="elections">
+  <div class="section-header">
+    <h3>Active Elections</h3>
+    <a href="#">View All Elections +</a>
+  </div>
+
+  <div class="election-row">
+    <div class="col title">
+      <strong>Delegates Election 2025</strong>
+      <small>Department</small>
+    </div>
+
+    <div class="col">
+      <span class="label">Start Date</span>
+      <span>Dec 1, 2025</span>
+    </div>
+
+    <div class="col">
+      <span class="label">End Date</span>
+      <span>Dec 20, 2025</span>
+    </div>
+
+    <div class="col">
+      <span class="label">Votes Cast</span>
+      <span>847 / 1,247 (68%)</span>
+    </div>
+
+    <div class="col status">
+      <span class="badge active">Active</span>
+    </div>
+  </div>
+
+  <div class="election-row">
+    <div class="col title">
+      <strong>Student Council Election</strong>
+      <small>University election</small>
+    </div>
+
+    <div class="col">
+      <span class="label">Start Date</span>
+      <span>Jan 15, 2026</span>
+    </div>
+
+    <div class="col">
+      <span class="label">End Date</span>
+      <span>Jan 30, 2026</span>
+    </div>
+
+    <div class="col">
+      <span class="label">Candidates</span>
+      <span>6 registered</span>
+    </div>
+
+    <div class="col status">
+      <span class="badge upcoming">Upcoming</span>
+    </div>
+  </div>
+</section>
+
+    
+    <section class="activity">
+      <h3>Recent Activity</h3>
+      <ul>
+        <li>🟢 New voter registration: John Smith <span>2 hours ago</span></li>
+        <li>🔵 Vote cast in Presidential Election <span>3 hours ago</span></li>
+        <li>🟣 Voter approved: Maria Garcia <span>5 hours ago</span></li>
+        <li>🟠 Election created: Student Council <span>1 day ago</span></li>
+      </ul>
+    </section>
+
+  </main>
+
+</body>
+</html>

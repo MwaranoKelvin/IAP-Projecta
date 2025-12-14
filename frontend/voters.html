@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SmartVote Admin Dashboard</title>
+  <link rel="stylesheet" href="admin.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+
+  
+  <header class="navbar">
+    <div class="logo">SmartVote System</div>
+    <nav>
+      <a href="admin.html">Dashboard</a>
+      <a href="results.html">Results</a>
+      <a href="settings.html">Settings</a>
+      <a href="#" class="logout">Logout</a>
+    </nav>
+  </header>
+   <main class="container">
+
+    
+    <section class="page-header">
+      <h1>Manage voters</h1>
+      <p>Review, approve, and manage voter registrations</p>
+    </section>
+
+    <section class="stats">
+      <div class="card voters">
+        <h4>Total Voters</h4>
+        <p>1,247</p>
+      </div>
+
+      <div class="card approved">
+        <h4>Approved</h4>
+        <p>5</p>
+      </div>
+
+      <div class="card pending">
+        <h4>Pending</h4>
+        <p>2</p>
+      </div>
+
+      <div class="card deactivated">
+        <h4>Deactivated</h4>
+        <p>1</p>
+      </div>
+    </section>
+    <section class="search">
+        <input class="searchbar" type="search" id="searchInput" placeholder="Search by name,ID,or email...">
+
+        <div><label><select id="filterCriteria">
+            <option value="name">Name</option>
+            <option value="id">ID</option>
+            <option value="email">Email</option>
+        </select></label>
+       
+    </section>
+
+    <section class="voter-data">
+          <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Voter ID</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Registration Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>John Lihanda</td>
+                <td>V12345</td>
+                <td>john.lihanda@email.com</td>
+                <td><span class="status approved">Approved</span></td>
+                <td>1/15/2025</td>
+                <td class="actions"><span><i class="fa-solid fa-xmark"></i></span><span><i class="fa-solid fa-trash-can"></i></span></td>
+            </tr>
+            <tr>
+                <td>Sarah Wairimu</td>
+                <td>V12346</td>
+                <td>sarah.w@email.com</td>
+                <td><span class="status approved">Approved</span></td>
+                <td>2/10/2025</td>
+                <td class="actions"><span><i class="fa-solid fa-xmark"></i></span><span><i class="fa-solid fa-trash-can"></i></span></td>
+            </tr>
+            <tr>
+                <td>Michael Bakari</td>
+                <td>V12347</td>
+                <td>mbakar@email.com</td>
+                <td><span class="status pending">Pending</span></td>
+                <td>12/10/2025</td>
+                <td class="actions"><span class="approve"><i class="fa-solid fa-check"></i></span><span><i class="fa-solid fa-trash-can"></i></span></td>
+            </tr>
+            <tr>
+                <td>Emily Okoth</td>
+                <td>V12348</td>
+                <td>emily.o@email.com</td>
+                <td><span class="status approved">Approved</span></td>
+                <td>3/22/2025</td>
+                <td class="actions"><span><i class="fa-solid fa-xmark"></i></span><span><i class="fa-solid fa-trash-can"></i></span></td>
+            </tr>
+            <tr>
+                <td>David Kitavi</td>
+                <td>V12349</td>
+                <td>dkitavi@email.com</td>
+                <td><span class="status pending">Pending</span></td>
+                <td>12/11/2025</td>
+                <td class="actions"><span class="approve"><i class="fa-solid fa-check"></i></span><span><i class="fa-solid fa-trash-can"></i></span></td>
+            </tr>
+            <tr>
+                <td>Maria Rosa</td>
+                <td>V12350</td>
+                <td>maria.r@email.com</td>
+                <td><span class="status approved">Approved</span></td>
+                <td>4/5/2025</td>
+                <td class="actions"><span class="approve"><i class="fa-solid fa-xmark"></i></span><span><i class="fa-solid fa-trash-can"></i></span></td>
+            </tr>
+            <tr>
+                <td>James Kinyua</td>
+                <td>V12351</td>
+                <td>kinyua@email.com</td>
+                <td><span class="status deactivated">Deactivated</span></td>
+                <td>1/30/2025</td>
+                <td class="actions"><span><i class="fa-solid fa-trash-can"></i></span></td>
+            </tr>
+            <tr>
+                <td>Lisa Akiniyi</td>
+                <td>V12352</td>
+                <td>lisa.a@email.com</td>
+                <td><span class="status approved">Approved</span></td>
+                <td>5/18/2025</td>
+                <td class="actions"><span><i class="fa-solid fa-xmark"></i></span><span><i class="fa-solid fa-trash-can"></i></span></td>
+            </tr>
+        </tbody>
+    </table>
+    </section>
+
+    </main>
+
+
+    <script src="admin.js"></script>
+
+  </body>
