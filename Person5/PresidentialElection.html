@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presidential Election 2025 - SmartVote System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f8f9fa;
+            color: #333;
+        }
+
+        .navbar {
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 0 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .brand-icon {
+            width: 32px;
+            height: 32px;
+            background: #2563eb;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .navbar-nav {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            list-style: none;
+        }
+
+        .navbar-nav a {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .navbar-nav a.active {
+            color: #2563eb;
+        }
+
+        .navbar-nav a:hover {
+            color: #2563eb;
+        }
+
+        .logout-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 30px;
+        }
+
+        .header-section {
+            margin-bottom: 25px;
+        }
+
+        .header-section h1 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 6px;
+        }
+
+        .header-section p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .info-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .info-card {
+            padding: 18px 25px;
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .info-card.blue {
+            background: #eff6ff;
+            border: 1px solid #dbeafe;
+        }
+
+        .info-card.pink {
+            background: #fdf2f8;
+            border: 1px solid #fbcfe8;
+        }
+
+        .info-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .info-content h3 {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .info-content p {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .section-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .candidates-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .candidate-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .candidate-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .candidate-photo {
+            width: 100px;
+            height: 100px;
+            background: #f3f4f6;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .candidate-photo svg {
+            width: 60px;
+            height: 60px;
+            color: #9ca3af;
+        }
+
+        .candidate-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 6px;
+        }
+
+        .candidate-party {
+            font-size: 13px;
+            color: #2563eb;
+            margin-bottom: 10px;
+        }
+
+        .candidate-position {
+            font-size: 13px;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 12px;
+        }
+
+        .candidate-platform {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            min-height: 60px;
+        }
+
+        .vote-btn {
+            width: 100%;
+            padding: 12px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background 0.3s;
+        }
+
+        .vote-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .vote-btn:active {
+            transform: scale(0.98);
+        }
+
+        .info-section {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 25px;
+        }
+
+        .info-section h3 {
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .info-list {
+            list-style: none;
+        }
+
+        .info-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .info-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-icon-small {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .modal-content h2 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .modal-content p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-cancel {
+            flex: 1;
+            padding: 12px;
+            background: #f3f4f6;
+            color: #666;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-confirm {
+            flex: 1;
+            padding: 12px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-confirm:hover {
+            background: #1d4ed8;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <div class="brand-icon">S</div>
+            SmartVote System
+        </div>
+        <ul class="navbar-nav">
+            <li><a href="VoterDashboard.html">Home</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Voting History</a></li>
+            <li>
+                <a href="/Kelvin/landingPage.html" class="logout-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                        <polyline points="16 17 21 12 16 7"/>
+                        <line x1="21" y1="12" x2="9" y2="12"/>
+                    </svg>
+                    Logout
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="header-section">
+            <h1>Presidential Election 2025</h1>
+            <p>Vote for the next President</p>
+        </div>
+
+        <div class="info-cards">
+            <div class="info-card blue">
+                <svg class="info-icon" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" stroke="#2563eb" stroke-width="2"/>
+                    <circle cx="12" cy="12" r="3" fill="#2563eb"/>
+                </svg>
+                <div class="info-content">
+                    <h3>Your vote is anonymous</h3>
+                    <p>Your identity is protected by encryption</p>
+                </div>
+            </div>
+            <div class="info-card pink">
+                <svg class="info-icon" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#ec4899" stroke-width="2" fill="none"/>
+                    <path d="M9 12l2 2 4-4" stroke="#ec4899" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                </svg>
+                <div class="info-content">
+                    <h3>You can only vote once</h3>
+                    <p>Once submitted, votes cannot be changed</p>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Select Your Candidate</h2>
+
+        <div class="candidates-grid">
+            <!-- Candidate 1: Sarah Johnson -->
+            <div class="candidate-card">
+                <div class="candidate-photo">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
+                </div>
+                <div class="candidate-name">Sarah Johnson</div>
+                <div class="candidate-party">Democratic Alliance</div>
+                <div class="candidate-position">President</div>
+                <div class="candidate-platform">Experienced leader focused on education and healthcare reform</div>
+                <button class="vote-btn" onclick="openModal('Sarah Johnson', 'Democratic Alliance')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 11l3 3L22 4"/>
+                        <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+                    </svg>
+                    Vote for Sarah
+                </button>
+            </div>
+
+            <!-- Candidate 2: Michael Chen -->
+            <div class="candidate-card">
+                <div class="candidate-photo">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
+                </div>
+                <div class="candidate-name">Michael Chen</div>
+                <div class="candidate-party">Progressive Party</div>
+                <div class="candidate-position">President</div>
+                <div class="candidate-platform">Advocate for climate action and technological innovation</div>
+                <button class="vote-btn" onclick="openModal('Michael Chen', 'Progressive Party')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 11l3 3L22 4"/>
+                        <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+                    </svg>
+                    Vote for Michael
+                </button>
+            </div>
+
+            <!-- Candidate 3: Emily Rodriguez -->
+            <div class="candidate-card">
+                <div class="candidate-photo">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
+                </div>
+                <div class="candidate-name">Emily Rodriguez</div>
+                <div class="candidate-party">Independent</div>
+                <div class="candidate-position">President</div>
+                <div class="candidate-platform">Champion of workers' rights and economic equality</div>
+                <button class="vote-btn" onclick="openModal('Emily Rodriguez', 'Independent')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 11l3 3L22 4"/>
+                        <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+                    </svg>
+                    Vote for Emily
+                </button>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h3>Important Information</h3>
+            <ul class="info-list">
+                <li>
+                    <svg class="info-icon-small" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                    All votes are encrypted and stored securely
+                </li>
+                <li>
+                    <svg class="info-icon-small" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <circle cx="12" cy="12" r="3" fill="#10b981"/>
+                    </svg>
+                    Your vote is completely anonymous and cannot be traced back to you
+                </li>
+                <li>
+                    <svg class="info-icon-small" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="15" y1="9" x2="9" y2="15"/>
+                        <line x1="9" y1="9" x2="15" y2="15"/>
+                    </svg>
+                    Once submitted, your vote cannot be changed or withdrawn
+                </li>
+                <li>
+                    <svg class="info-icon-small" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2">
+                        <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+                        <polyline points="22 4 12 14.01 9 11.01"/>
+                    </svg>
+                    You will receive a confirmation once your vote is successfully recorded
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <h2>Confirm Your Vote</h2>
+            <p>Are you sure you want to vote for <strong id="candidateName"></strong> from the <strong id="candidateParty"></strong>?</p>
+            <p style="color: #ef4444; font-weight: 600;">This action cannot be undone!</p>
+            <div class="modal-buttons">
+                <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+                <button class="btn-confirm" onclick="submitVote()">Confirm Vote</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedCandidate = '';
+        let selectedParty = '';
+
+        function openModal(candidateName, candidateParty) {
+            selectedCandidate = candidateName;
+            selectedParty = candidateParty;
+            document.getElementById('candidateName').textContent = candidateName;
+            document.getElementById('candidateParty').textContent = candidateParty;
+            document.getElementById('confirmModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('confirmModal').classList.remove('active');
+        }
+
+        function submitVote() {
+            const currentId = localStorage.getItem('currentVoterId');
+            if (!currentId) {
+                alert('Please register or login before voting.');
+                window.location.href = 'VoterRegistration.html';
+                return;
+            }
+
+            const voters = JSON.parse(localStorage.getItem('voters') || '[]');
+            const voter = voters.find(v => v.id === currentId);
+
+            if (!voter) {
+                alert('Voter record not found. Please register.');
+                window.location.href = 'VoterRegistration.html';
+                return;
+            }
+
+            if (voter.hasVoted) {
+                // Already voted -> show already voted page
+                window.location.href = 'AlreadyVoted.html';
+                return;
+            }
+
+            // Tally the vote in localStorage
+            const votes = JSON.parse(localStorage.getItem('votes') || '{}');
+            votes[selectedCandidate] = (votes[selectedCandidate] || 0) + 1;
+            localStorage.setItem('votes', JSON.stringify(votes));
+
+            // Mark voter as having voted
+            voter.hasVoted = true;
+            voter.votedFor = selectedCandidate;
+            voter.votedAt = Date.now();
+            const updated = voters.map(v => v.id === voter.id ? voter : v);
+            localStorage.setItem('voters', JSON.stringify(updated));
+
+            // Save a lastVote record for the confirmation page
+            localStorage.setItem('lastVote', JSON.stringify({
+                candidate: selectedCandidate,
+                party: selectedParty,
+                voterId: currentId,
+                time: Date.now()
+            }));
+
+            closeModal();
+            window.location.href = 'VoteConfirmation.html';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('confirmModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

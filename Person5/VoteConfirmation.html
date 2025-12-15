@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vote Confirmation - SmartVote System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #000;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal {
+            background: white;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 420px;
+            padding: 35px 30px 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: #999;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 5px;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .close-btn:hover {
+            background: #f3f4f6;
+            color: #666;
+        }
+
+        .warning-icon {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .warning-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .warning-triangle {
+            fill: none;
+            stroke: #f59e0b;
+            stroke-width: 2;
+        }
+
+        .warning-exclamation {
+            fill: #f59e0b;
+        }
+
+        .modal-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .modal-message {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .candidate-name {
+            color: #2563eb;
+            font-weight: 600;
+        }
+
+        .modal-warning {
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 11px 28px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .btn-cancel {
+            background: #f3f4f6;
+            color: #666;
+        }
+
+        .btn-cancel:hover {
+            background: #e5e7eb;
+        }
+
+        .btn-confirm {
+            background: #2563eb;
+            color: white;
+            padding: 11px 32px;
+        }
+
+        .btn-confirm:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-confirm:active {
+            transform: scale(0.98);
+        }
+
+        /* Demo page styling */
+        .demo-container {
+            text-align: center;
+            color: white;
+        }
+
+        .demo-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .demo-btn {
+            padding: 12px 24px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .demo-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-dashboard {
+            display: inline-block;
+            background: white;
+            color: #2563eb;
+            border: 2px solid #2563eb;
+            padding: 10px 22px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        .btn-dashboard:hover {
+            background: #eff6ff;
+            transform: translateY(-2px);
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="modal-overlay">
+        <div class="modal">
+            <button class="close-btn" onclick="goDashboard()">&times;</button>
+
+            <div class="warning-icon" style="margin-bottom:8px;">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10" stroke="#10b981" stroke-width="2" fill="none"></circle>
+                    <path d="M9 12l2 2 4-4" stroke="#10b981" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+            </div>
+
+            <h2 class="modal-title">Vote Recorded</h2>
+
+            <p class="modal-message" id="confirmationMessage">Thank you! Your vote has been recorded.</p>
+
+            <div style="text-align:center; margin-top:18px;">
+                <button class="btn btn-confirm" onclick="goDashboard()">Back to Dashboard</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Read lastVote and display candidate details
+        (function() {
+            const last = JSON.parse(localStorage.getItem('lastVote') || 'null');
+            const msg = document.getElementById('confirmationMessage');
+            if (!last) {
+                msg.textContent = 'No recent vote found. If you just voted, please try again.';
+                return;
+            }
+
+            const time = new Date(last.time).toLocaleString();
+            msg.innerHTML = `Your vote for <strong>${last.candidate}</strong> (${last.party}) was recorded on ${time}.`;
+        })();
+
+        function goDashboard() {
+            window.location.href = 'VoterDashboard.html';
+        }
+    </script>
+</body>
+</html>

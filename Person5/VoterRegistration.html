@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voter Registration</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .icon-container {
+            width: 60px;
+            height: 60px;
+            background: #e3f2fd;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px;
+        }
+
+        .icon {
+            width: 30px;
+            height: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 22px;
+            color: #333;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            flex: 1;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        label .required {
+            color: #f44336;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+            background: #fafafa;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            outline: none;
+            border-color: #2196F3;
+            background: white;
+        }
+
+        input::placeholder {
+            color: #aaa;
+        }
+
+        .upload-area {
+            border: 2px dashed #ddd;
+            border-radius: 6px;
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: #fafafa;
+        }
+
+        .upload-area:hover {
+            border-color: #2196F3;
+            background: #f5f9ff;
+        }
+
+        .upload-icon {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 10px;
+            opacity: 0.5;
+        }
+
+        .upload-text {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .upload-info {
+            color: #999;
+            font-size: 12px;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .register-btn {
+            width: 100%;
+            padding: 14px;
+            background: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+
+        .register-btn:hover {
+            background: #1976D2;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .login-link a {
+            color: #2196F3;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon-container">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z" fill="#2196F3"/>
+                <path d="M12 14C6.477 14 2 18.477 2 24H22C22 18.477 17.523 14 12 14Z" fill="#2196F3"/>
+            </svg>
+        </div>
+
+        <h1>Voter Registration</h1>
+        <p class="subtitle">Create your SmartVote account</p>
+
+        <form id="registrationForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Full Name<span class="required">*</span></label>
+                    <input id="fullName" name="fullName" type="text" placeholder="John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label>National ID / Student ID<span class="required">*</span></label>
+                    <input id="nationalId" name="nationalId" type="text" placeholder="ID123456" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Email Address<span class="required">*</span></label>
+                <input id="email" name="email" type="email" placeholder="your@email.com" required>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Password<span class="required">*</span></label>
+                    <input id="password" name="password" type="password" placeholder="At least 6 characters" required>
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password<span class="required">*</span></label>
+                    <input id="confirmPassword" name="confirmPassword" type="password" placeholder="Re-enter password" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Upload ID Image (Optional)</label>
+                <label for="fileUpload" class="upload-area">
+                    <svg class="upload-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 4L12 16M12 4L8 8M12 4L16 8" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M4 17V19C4 20.1046 4.89543 21 6 21H18C19.1046 21 20 20.1046 20 19V17" stroke="#999" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <div class="upload-text">Click to upload your ID</div>
+                    <div class="upload-info">PNG, JPG up to 10MB</div>
+                </label>
+                <input type="file" id="fileUpload" accept="image/png, image/jpeg, image/jpg">
+            </div>
+
+            <button type="submit" class="register-btn">Register</button>
+
+            <div class="login-link">
+                Already have an account?<a href="#">Login here</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Handle file upload display
+        const fileUpload = document.getElementById('fileUpload');
+        const uploadArea = document.querySelector('.upload-area');
+
+        fileUpload.addEventListener('change', function(e) {
+            if (this.files && this.files[0]) {
+                const fileName = this.files[0].name;
+                uploadArea.querySelector('.upload-text').textContent = fileName;
+            }
+        });
+
+        // Handle form submission and save voter to localStorage
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('fullName').value.trim();
+            const id = document.getElementById('nationalId').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const confirm = document.getElementById('confirmPassword').value;
+
+            if (!name || !id || !email || !password) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+
+            if (password !== confirm) {
+                alert('Passwords do not match.');
+                return;
+            }
+
+            // Load existing voters
+            const voters = JSON.parse(localStorage.getItem('voters') || '[]');
+
+            // If ID already exists, set as current and redirect (simulates login)
+            const exists = voters.find(v => v.id === id || v.email === email);
+            if (exists) {
+                localStorage.setItem('currentVoterId', id);
+                alert('You are already registered. Redirecting to dashboard.');
+                window.location.href = 'VoterDashboard.html';
+                return;
+            }
+
+            // Add new voter
+            const voter = {
+                id: id,
+                name: name,
+                email: email,
+                hasVoted: false,
+                registeredAt: Date.now()
+            };
+
+            voters.push(voter);
+            localStorage.setItem('voters', JSON.stringify(voters));
+            // Mark this as the current session voter
+            localStorage.setItem('currentVoterId', id);
+
+            // Redirect to success page
+            window.location.href = 'RegistrationSuccess.html';
+        });
+    </script>
+</body>
+</html>

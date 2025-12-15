@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Successful</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #000;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal {
+            background: white;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 400px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .modal-title {
+            color: #10b981;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: #999;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
+        .close-btn:hover {
+            color: #666;
+        }
+
+        .modal-content {
+            text-align: center;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+
+        .success-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .circle {
+            stroke: #10b981;
+            stroke-width: 3;
+            fill: none;
+            stroke-dasharray: 251;
+            stroke-dashoffset: 251;
+            animation: drawCircle 0.6s ease-out forwards;
+        }
+
+        .checkmark {
+            stroke: #10b981;
+            stroke-width: 3;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: drawCheck 0.4s ease-out 0.6s forwards;
+        }
+
+        @keyframes drawCircle {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes drawCheck {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        .message {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .login-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .login-btn:active {
+            transform: scale(0.98);
+        }
+
+        a.login-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            width: 100%;
+            padding: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="modal">
+        <div class="modal-header">
+            <div class="modal-title">Registration Successful!</div>
+            <button class="close-btn" onclick="closeModal()">×</button>
+        </div>
+
+        <div class="modal-content">
+            <div class="success-icon">
+                <svg viewBox="0 0 100 100">
+                    <circle class="circle" cx="50" cy="50" r="40"/>
+                    <path class="checkmark" d="M30 50 L45 65 L70 35"/>
+                </svg>
+            </div>
+
+            <p class="message">
+                Your account has been created successfully. Please<br>
+                wait for admin approval.
+            </p>
+
+            <a href="VoterDashboard.html" class="login-btn">Go to Voter Dashboard</a>
+        </div>
+    </div>
+
+    <script>
+        function closeModal() {
+            // Redirect to landing page
+            window.location.href = 'landingPage.html';
+        }
+
+        function goToLogin() {
+            // Redirect to dashboard
+            window.location.href = 'VoterDashboard.html';
+        }
+    </script>
+</body>
+</html>
